@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke</title>
+    <style>
+        body { background-color: #1a1a1a; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        #joke-container { background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); text-align: center; width: 300px; }
+        button { padding: 10px 20px; background-color: #4caf50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #45a049; }
+        #joke { margin-top: 20px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <div id="joke-container">
+        <h2>Random Joke</h2>
+        <button id="getJokeBtn">Get Joke</button>
+        <div id="joke"></div>
+    </div>
+
+    <script>
+        const getJokeBtn = document.querySelector("#getJokeBtn");
+        const jokeDisplay = document.querySelector("#joke"); // Fixed ID
+
+        async function fetchJoke() {
+            try {
+                console.log("API started");
+                
+                // Fetch API
+                const response = await fetch("https://official-joke-api.appspot.com/random_joke", {
+                    method: "GET", // GET so no body needed
+                    // headers: {
+                    //     "Content-Type": "application/json" // Tell server we want JSON
+                    // }
+                });
+                console.log("Fetch done, status: ", response.status);
+                
+
+                // Check if response is good
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`); 
+                }
+                console.log("Response ok");
+                
+
+                // Parse the JSON
+                const data = await response.json();
+                console.log("JSON Parsed");
+                
+
+                // Display the joke
+                jokeDisplay.textContent = `${data.setup} - ${data.punchline}`;
+                console.log("Joke fetched:", data); 
+                console.log("Joke Displayed");
+                
+
+            } catch (error) {
+                console.log(`Fetch Failed: ${error}`);
+                jokeDisplay.textContent = "Why don’t I work? - Because I’m a hardcoded joke!";
+            }
+        }
+
+        getJokeBtn.addEventListener("click", fetchJoke);
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+datatypes: (8 datatypes are there in js )
+String
+Numeber
+Boolean
+Bigint
+
+Undefined : not a defined value now but it might contain some value
+null : empty(not 0 bcoz 0 is not null)
+
+Object
+
+Symbol
+
+// varriables
+
+var score = 112 
+
+let score = 102;
