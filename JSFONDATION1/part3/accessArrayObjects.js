@@ -56,6 +56,7 @@ console.log(users[1].name);
 users.forEach(user => {
     console.log(`${user.name} is ${user.age} years old`);
     
+    
 })
 
 // for of
@@ -76,6 +77,42 @@ let numbers = [1,2,3,4];
 let sum = numbers.reduce((acc, num) => acc + num, 0);
 
 console.log(sum); // 10
+
+// use of map and slice
+
+const tasks = [
+    { "task": "Buy Milk" },
+    { "task": "Go to Gym" },
+    { "task": "Learn Node.js" }
+]
+const taskToRemove = "Buy Milk"
+
+
+//map(jsut an example)
+const updatedTasks = tasks.filter(task => task.task != taskToRemove); // Remove the matching task and keeps only the tasks that do not matches taskToRemove inside an array
+
+
+
+// console.log(`yha hu be: ${updatedTasks}`); // wrong bcoz Arrays in JavaScript don’t stringify well inside backticks.
+console.log("Yha hu be:", updatedTasks);
+
+
+// using splice
+const index = tasks.findIndex(task => task.task === taskToRemove); // find the index of the task to remove
+
+if(index !== -1){
+    tasks.splice(index, 1); // remove the task at found index
+    console.log("Updated task:", tasks);   
+} else {
+    console.log("Task not found");
+}
+
+
+
+
+
+
+
 
 
 
